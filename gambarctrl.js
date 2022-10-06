@@ -15,7 +15,7 @@ const sqlQuery = "SELECT * FROM gambar";
   });
 };
 
-const addgambar = async(req,res) => {
+const addgambar = (req,res) => {
     
     const idimg = req.body.idimg;
     const gambar = req.file.gambar;
