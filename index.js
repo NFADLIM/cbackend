@@ -11,15 +11,14 @@ const multer = require('multer');
 
 
 
-
-
-
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(fasilitasroute);
 app.use(gedungroute);
 app.use(gambarroute);
+
 app.listen(3000, () => {
     console.log('server berhasil berjalan pada port 3000!');
   });

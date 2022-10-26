@@ -1,5 +1,5 @@
 const { db } = require('./db');
-const fileUpload = require('express-fileupload');
+const fileupload = require('express-fileupload')
 const multer = require("multer");
 const fs = require("fs");
 const upload = multer({ dest: "uploads/" });
@@ -29,31 +29,33 @@ const getGedungbyid = (req,res) => {
     });
 };
 
-const addGedung = (req,res) => {
+const addGedung = (req,res, next) => {
     const idGedung = req.body.idGedung;
     const namaGedung = req.body.namaGedung;
     const linkTour = req.body.linkTour;
     const penjelasan = req.body.penjelasan;
-    const gambar = req.body.gambar;
+    const file = req.files.gambar;
+    const gambar = file.name;
     
     const sqlQuery = "INSERT INTO gedung (idGedung, namaGedung, linkTour, penjelasan, gambar) VALUE (?, ?, ?, ?, ?)";
+    file.mv('./uploads/' + file.name, function(err, result) { 
+      db.query(sqlQuery, [idGedung, namaGedung, linkTour,penjelasan, gambar], (err, result) =>{
+      if (err)
+      throw err;
+      res.send({
+        success: true,
+        Message: "file uplopaded"
+      })
     
-    db.query(sqlQuery, [idGedung, namaGedung, linkTour,penjelasan, gambar], (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send(result);
-        console.log(result);
-      }
-    });
-
-};
+  })
+    })
+  }
 
 const updateGedung = (req, res) => {
     const namaGedung = req.body.namaGedung;
     const linkTour = req.body.linkTour;
     const penjelasan = req.body.penjelasan;
-    const gambar = req.body.gambar;
+    const gambar = req.file;
     
     
     const sqlQuery = " UPDATE fasilitas SET namaGedung = ?, linkTour = ?, penjelasan = ?, gambar = ? WHERE idGedung =?";

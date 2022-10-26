@@ -2,20 +2,59 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const { db } = require('./db');
 const ctrl = require('./gambarctrl');
+const fileupload = require('express-fileupload');
+var cloudinary = require('cloudinary').v2
 
-const storange = multer.diskStorage({
-    destination: './uploads',
-    filename: (req, file, cb) => {
-        return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
-    }
-})
+router.use(fileupload({
+  useTempFiles: true
+}));
+cloudinary.config({ 
+  cloud_name: 'dpycyvggt', 
+  api_key: '763335633772664', 
+  api_secret: 'xjjJg0X4DuiKk2knwvJOh5V4FOI' 
+});
 
-const uploads = multer({
-    storange: storange
-})
-
+//const upload = multer({ storange:multer.memoryStorage()});
+router.post('/image', ctrl.addgambar);
+router.post('/image/db', ctrl.uploadGambar);
+router.use('/gambar', express.static('uploads/gambar'));
 router.get('/image/display', ctrl.getgambar)
-router.post('/image',uploads.single('gambar'), ctrl.addgambar)
+//router.post('/image', upload.single('gambar') ,ctrl.addgambar)
+//router.get("/image/display/:id", ctrl.getgambarid)
+router.get("/image/display/:id", (req, res, next) => {
+    db.query(
+      "SELECT `gambar` FROM `image` WHERE `idimg` = ?",
+      [req.params.id],
+      (err, results) => {
+        if (err) {
+          return next(err);
+        }
+  
+        if (!results.length) {
+          return res.sendStatus(404);
+        }
+  
+        // set the appropriate content type
+        res.set("Content-Type", "image/jpg");
+        res.send(results[0].gambar);
+      }
+    );
+  });
 
+  function errHandler(err, req, res, next) {
+    if (err instanceof multer.MulterError) {
+        res.json({
+            success: 0,
+            message: err.message
+        })
+    }
+}
+router.use(errHandler);
 module.exports = router;
+//route gambar pake multer
+// error di sql
+// mencari solusi
+// code name impact
+// note cari tutorial lagi
