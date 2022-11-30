@@ -19,6 +19,7 @@ const getFasilitasid = (req,res) => {
     db.query(sqlQuery, idFasilitas, (err, result) => {
       if (err) {
         console.log(err);
+        console.log("gk ada");
       } else {
         res.send(result);
         console.log(result);
