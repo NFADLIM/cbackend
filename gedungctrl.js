@@ -3,6 +3,7 @@ const fileupload = require('express-fileupload')
 const multer = require("multer");
 const fs = require("fs");
 const upload = multer({ dest: "uploads/" });
+
 const getGedung = (req, res) => {
 const sqlQuery = "SELECT * FROM gedung";
 

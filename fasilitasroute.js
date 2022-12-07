@@ -4,10 +4,10 @@ const ctrl = require('./fasilitasctrl');
 
 
 
-router.get('/fasilitas/', ctrl.getFasilitas);
+router.get('/fasilitas/list', ctrl.getFasilitas);
 router.get('/fasilitas/:idFasilitas', ctrl.getFasilitasid);
-router.post('/fasilitas/', ctrl.addFasilitas);
-router.put('/fasilitas/', ctrl.updateFasilitas);
-router.delete('/fasilitas/:idFasilitas', ctrl.delFasilitas);
+router.post('/fasilitas/add', ctrl.addFasilitas);
+router.put('/fasilitas/update', ctrl.updateFasilitas);
+router.delete('/fasilitas/delete/:idFasilitas', ctrl.delFasilitas);
 
 module.exports = router;

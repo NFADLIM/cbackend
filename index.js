@@ -5,12 +5,11 @@ const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
 const app = express();
-const jwt = require('jsonwebtoken');
-const fileUpload = require('express-fileupload');
+
 const fasilitasroute = require ('./fasilitasroute');
 const gedungroute = require ('./gedungroute');
 const gambarroute = require ('./gambarroute');
-const loginrouter = require ('./loginrouter');
+
 
 const oneDay = 1000 * 60 * 60 * 24;
 
@@ -47,6 +46,9 @@ app.post('/login',(req,res) => {
       session.userid=req.body.username;
       console.log(req.session)
       res.send(`Hey there, welcome <a href=\'/logout'>click to logout</a>`);
+      app.use(fasilitasroute);
+      app.use(gedungroute);
+  
   }
   else{
       res.send('Invalid username or password');
@@ -58,7 +60,7 @@ app.get('/edit',(req,res) => {
   if(session.userid){
     app.use(fasilitasroute);
     app.use(gedungroute);
-      res.send("Welcome User ");
+
   }else
   res.sendFile('./home.html',{root:__dirname})
 
@@ -66,7 +68,7 @@ app.get('/edit',(req,res) => {
 
 app.use(fasilitasroute);
 app.use(gedungroute);
-app.use(gambarroute);
+//app.use(gambarroute);
 
 app.get('/logout',(req,res) => {
   req.session.destroy();
