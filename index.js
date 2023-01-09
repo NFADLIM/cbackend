@@ -9,7 +9,7 @@ const path = require('path');
 const fasilitasroute = require ('./fasilitasroute');
 const gedungroute = require ('./gedungroute');
 
-
+require('dotenv').config()
 
 const oneDay = 1000 * 60 * 60 * 24;
 
