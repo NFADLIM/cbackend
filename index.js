@@ -34,7 +34,7 @@ app.use(sessions({
 //	response.sendFile(path.join(__dirname + '/login.html'));
 //});
 
-app.post('/', function(request, response) {
+app.post('/login', function(request, response) {
 	let username = request.body.username;
 	let password = request.body.password;
 	if (username && password) {
