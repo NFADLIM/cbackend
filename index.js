@@ -30,11 +30,11 @@ app.use(sessions({
   cookie: { maxAge: oneDay },
   resave: false
 }));
-app.get('/', function(request, response) {
-	response.sendFile(path.join(__dirname + '/login.html'));
-});
+//app.get('/', function(request, response) {
+//	response.sendFile(path.join(__dirname + '/login.html'));
+//});
 
-app.post('/auth', function(request, response) {
+app.post('/', function(request, response) {
 	let username = request.body.username;
 	let password = request.body.password;
 	if (username && password) {
