@@ -15,7 +15,7 @@ const sqlQuery = "SELECT * FROM gedung JOIN fasilitas WHERE gedung.idGedung = fa
 
 const getFasilitasid = (req,res) => {
     const idFasilitas = req.params.idFasilitas;
-    const sqlQuery = "SELECT * FROM fasilitas WHERE idGedung = ?";
+    const sqlQuery = "SELECT * FROM fasilitas WHERE idFasilitas = ?";
     db.query(sqlQuery, idFasilitas, (err, result) => {
       if (err) {
         console.log(err);
@@ -48,14 +48,15 @@ const addFasilitas = (req,res) => {
 };
 
 const updateFasilitas = (req, res) => {
-    const idGedung = req.body.idGedung;
+  const idFasilitas = req.params.idFasilitas;  
+  const idGedung = req.body.idGedung;
     const namaFasilitas = req.body.namaFasilitas;
     const linkTour = req.body.linkTour;
     const penjelasan = req.body.penjelasan;
     
     const sqlQuery = " UPDATE fasilitas SET idGedung = ?, namaFasilitas = ?, linkTour = ?, penjelasan = ? WHERE idFasilitas =?";
     
-    db.query(sqlQuery, [idGedung, namaFasilitas, linkTour,penjelasan], (err, result) => {
+    db.query(sqlQuery, [idFasilitas ,idGedung, namaFasilitas, linkTour,penjelasan], (err, result) => {
       if (err) {
         console.log(err);
       } else {

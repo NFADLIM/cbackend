@@ -54,6 +54,7 @@ const addGedung = (req,res, next) => {
 
 const updateGedung = (req, res) => {
     const namaGedung = req.body.namaGedung;
+    const idGedung = req.params.idGedung;
     const linkTour = req.body.linkTour;
     const penjelasan = req.body.penjelasan;
     const gambar = req.file;
@@ -61,7 +62,7 @@ const updateGedung = (req, res) => {
     
     const sqlQuery = " UPDATE fasilitas SET namaGedung = ?, linkTour = ?, penjelasan = ?, gambar = ? WHERE idGedung =?";
     
-    db.query(sqlQuery, [idGedung, namaFasilitas, linkTour,penjelasan], (err, result) => {
+    db.query(sqlQuery, [idGedung, namaGedung, linkTour,penjelasan], (err, result) => {
       if (err) {
         console.log(err);
       } else {

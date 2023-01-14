@@ -16,7 +16,7 @@ router.use(fileupload({
 router.get('/gedung/list', ctrl.getGedung);
 router.get('/gedung/:idGedung', ctrl.getGedungbyid);
 router.post('/gedung/add', ctrl.addGedung);
-router.put('/gedung/update', ctrl.updateGedung);
+router.put('/gedung/update/:idGedung', ctrl.updateGedung);
 router.delete('/gedung/delete/:idGedung', ctrl.delGedung);
 router.put('/gedung/uploads/:idGedung',ctrl.upgambar);
 
