@@ -35,14 +35,15 @@ app.use(sessions({
 //});
 
 app.post('/login', function(request, response) {
-	let username = request.body.username;
+	//let username = request.body.username;
+	let email = request.body.email;
 	let password = request.body.password;
-	if (username && password) {
-		db.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+	if (email && password) {
+		db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
 			if (error) throw error;
 			if (results.length > 0) {
 				request.session.loggedin = true;
-				request.session.username = username;
+				request.session.email = email;
 				response.redirect('/edit');
 			} else {
 				response.send('Incorrect Username and/or Password!');
@@ -57,7 +58,7 @@ app.post('/login', function(request, response) {
 
 app.get('/edit',(request,response) => {
 if (request.session.loggedin) {
-  response.send('Welcome back, ' + request.session.username + '!');
+  response.send('Welcome back, ' + request.session.email + '!');
 app.use(fasilitasroute);
 app.use(gedungroute);
 
