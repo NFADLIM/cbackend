@@ -54,28 +54,27 @@ const updateFasilitas = (req, res) => {
     const linkTour = req.body.linkTour;
     const penjelasan = req.body.penjelasan;
     
-    const sqlQuery = " UPDATE fasilitas SET idGedung = ?, namaFasilitas = ?, linkTour = ?, penjelasan = ? WHERE idFasilitas =?";
+    const sqlQuery = " UPDATE fasilitas SET idGedung = ?, namaFasilitas = ?, linkTour = ?, penjelasan = ? WHERE idFasilitas = ?";
     
-    db.query(sqlQuery, [idFasilitas ,idGedung, namaFasilitas, linkTour,penjelasan], (err, result) => {
+    db.query(sqlQuery, [idGedung, namaFasilitas, linkTour,penjelasan, idFasilitas], (err, result) => {
       if (err) {
         console.log(err);
       } else {
-        res.send(result);
         console.log(result);
       }
     });
 };
 
 const delFasilitas = (req, res) => {
-    const idFasilitas = req.body.idFasilitas;
+    const idFasilitas = req.params.idFasilitas;
 
     const sqlQuery = "DELETE FROM fasilitas WHERE idFasilitas = ?";
     db.query(sqlQuery, idFasilitas, (err, result) => {
       if (err) {
-        console.log(err);
+        console.log(err );
       } else {
         res.send(result);
-        console.log(result);
+        console.log(result + "file deleted");
       }
     });
 };
