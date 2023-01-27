@@ -57,11 +57,10 @@ const updateGedung = (req, res) => {
     const idGedung = req.params.idGedung;
     const linkTour = req.body.linkTour;
     const penjelasan = req.body.penjelasan;
-    const file = req.files.gambar;
-    const gambar = file.name;
+    const gambar = req.body.gambar;
     
-    const sqlQuery = " UPDATE fasilitas SET namaGedung = ?, linkTour = ?, penjelasan = ?, gambar = ? WHERE idGedung =?";
-    file.mv('./uploads/' + file.name, function(er,result) {
+    const sqlQuery = " UPDATE gedung SET namaGedung = ?, linkTour = ?, penjelasan = ?, gambar = ? WHERE idGedung =?";
+
     db.query(sqlQuery, [namaGedung, linkTour,penjelasan, gambar, idGedung], (err, result) => {
       if (err) {
         console.log(err);
@@ -70,7 +69,6 @@ const updateGedung = (req, res) => {
         console.log(result);
       }
     });
-  });
 };
 
 const delGedung = (req, res) => {
