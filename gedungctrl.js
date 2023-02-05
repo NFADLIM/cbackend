@@ -39,12 +39,12 @@ const addGedung = (req,res, next) => {
     
     const sqlQuery = "INSERT INTO gedung (idGedung, namaGedung, linkTour, penjelasan, gambar) VALUE (?, ?, ?, ?, ?)";
       db.query(sqlQuery, [idGedung, namaGedung, linkTour,penjelasan, gambar], (err, result) =>{
-      if (err)
-      throw err;
-      res.send({
-        success: true,
-        Message: "file uplopaded"
-      })
+        if (err) {
+          console.log(err);
+        } else {
+          res.send(result);
+          console.log(result);
+        }
     
   })
     }
