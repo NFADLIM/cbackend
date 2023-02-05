@@ -37,8 +37,8 @@ const addGedung = (req,res, next) => {
     const penjelasan = req.body.penjelasan;
     const gambar = req.body.gambar
     
-    const sqlQuery = "INSERT INTO gedung (idGedung, namaGedung, linkTour, penjelasan, gambar) VALUE (?, ?, ?, ?, ?)";
-      db.query(sqlQuery, [idGedung, namaGedung, linkTour,penjelasan, gambar], (err, result) =>{
+    const sqlQuery = "INSERT INTO gedung (idGedung, namaGedung, penjelasan, linkTour, gambar) VALUE (?, ?, ?, ?, ?)";
+      db.query(sqlQuery, [idGedung, namaGedung, penjelasan,linkTour, gambar], (err, result) =>{
         if (err) {
           console.log(err);
         } else {
