@@ -69,7 +69,7 @@ const updateGedung = (req, res) => {
 };
 
 const delGedung = (req, res) => {
-    const idGedung = req.body.idGedung;
+    const idGedung = req.params.idGedung;
 
     const sqlQuery = "DELETE FROM gedung WHERE idGedung = ?";
     db.query(sqlQuery, idGedung, (err, result) => {
