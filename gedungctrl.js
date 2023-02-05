@@ -35,11 +35,9 @@ const addGedung = (req,res, next) => {
     const namaGedung = req.body.namaGedung;
     const linkTour = req.body.linkTour;
     const penjelasan = req.body.penjelasan;
-    const file = req.files.gambar;
-    const gambar = file.name;
+    const gambar = req.body.gambar
     
     const sqlQuery = "INSERT INTO gedung (idGedung, namaGedung, linkTour, penjelasan, gambar) VALUE (?, ?, ?, ?, ?)";
-    file.mv('./uploads/' + file.name, function(err, result) { 
       db.query(sqlQuery, [idGedung, namaGedung, linkTour,penjelasan, gambar], (err, result) =>{
       if (err)
       throw err;
@@ -49,8 +47,7 @@ const addGedung = (req,res, next) => {
       })
     
   })
-    })
-  }
+    }
 
 const updateGedung = (req, res) => {
     const namaGedung = req.body.namaGedung;
