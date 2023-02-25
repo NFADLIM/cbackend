@@ -37,7 +37,7 @@ app.post('/login', function(request, response) {
 	let email = request.body.email;
 	let password = request.body.password;
 	if (email && password) {
-		db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
+		db.query('SELECT * FROM akun WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
 			if (error) throw error;
 			if (results.length > 0) {
 				request.session.loggedin = true;
@@ -59,7 +59,7 @@ app.put('/Update', function(req, response) {
     let email = req.body.email;
     let password = req.body.password;
       
-      const sqlQuery = " UPDATE users SET username = ?, email = ?, password = ? WHERE id = 1";
+      const sqlQuery = " UPDATE akun SET username = ?, email = ?, password = ? WHERE id = 1";
       
       db.query(sqlQuery, [username, email, password, id], (err, result) => {
         if (err) {
