@@ -33,10 +33,11 @@ const addFasilitas = (req,res) => {
     const namaFasilitas = req.body.namaFasilitas;
     const linkTour = req.body.linkTour;
     const penjelasan = req.body.penjelasan;
+    const image = req.body.image;
     
-    const sqlQuery = "INSERT INTO fasilitas (idFasilitas,idGedung, namaFasilitas, linkTour, penjelasan) VALUE (?,?, ?, ?, ?)";
+    const sqlQuery = "INSERT INTO fasilitas (idFasilitas,idGedung, namaFasilitas, linkTour, penjelasan, image) VALUE (?,?, ?, ?, ?, ?)";
     
-    db.query(sqlQuery, [idFasilitas, idGedung, namaFasilitas, linkTour,penjelasan], (err, result) => {
+    db.query(sqlQuery, [idFasilitas, idGedung, namaFasilitas, linkTour,penjelasan, image], (err, result) => {
       if (err) {
         console.log(err);
       } else {
