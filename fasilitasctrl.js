@@ -1,7 +1,7 @@
 const { db } = require('./db');
 
 const getFasilitas = (req, res) => {
-const sqlQuery = "SELECT * FROM gedung JOIN fasilitas WHERE gedung.idGedung = fasilitas.idGedung";
+const sqlQuery = "SELECT * FROM fasilitas JOIN gedung WHERE gedung.idGedung = fasilitas.idGedung";
 
   db.query(sqlQuery, (err, result) => {
     if (err) {
