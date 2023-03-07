@@ -1,6 +1,6 @@
 const { db } = require('./db');
 
-const getFasilitas = (req, res) => {
+const getFasilitasjoin = (req, res) => {
 const sqlQuery = "SELECT * FROM fasilitas JOIN gedung WHERE gedung.idGedung = fasilitas.idGedung";
 
   db.query(sqlQuery, (err, result) => {
@@ -12,6 +12,18 @@ const sqlQuery = "SELECT * FROM fasilitas JOIN gedung WHERE gedung.idGedung = fa
     }
   });
 };
+
+const getFasilitas = (req, res) => {
+  const sqlQuery = "SELECT * FROM fasilitas";
+  db.query(sqlQuery, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+      console.log(result);
+    }
+  });
+}
 
 const getFasilitasid = (req,res) => {
     const idFasilitas = req.params.idFasilitas;
@@ -33,11 +45,11 @@ const addFasilitas = (req,res) => {
     const namaFasilitas = req.body.namaFasilitas;
     const linkTour = req.body.linkTour;
     const penjelasan = req.body.penjelasan;
-    const image = req.body.image;
+    //const image = req.body.image;
     
-    const sqlQuery = "INSERT INTO fasilitas (idFasilitas,idGedung, namaFasilitas, linkTour, penjelasan, image) VALUE (?,?, ?, ?, ?, ?)";
+    const sqlQuery = "INSERT INTO fasilitas (idFasilitas,idGedung, namaFasilitas, linkTour, penjelasan) VALUE (?,?, ?, ?, ?)";
     
-    db.query(sqlQuery, [idFasilitas, idGedung, namaFasilitas, linkTour,penjelasan, image], (err, result) => {
+    db.query(sqlQuery, [idFasilitas, idGedung, namaFasilitas, linkTour,penjelasan], (err, result) => {
       if (err) {
         console.log(err);
       } else {
@@ -82,6 +94,7 @@ const delFasilitas = (req, res) => {
 
 module.exports = {
     getFasilitas,
+    getFasilitasjoin,
     getFasilitasid,
     addFasilitas,
     updateFasilitas,
