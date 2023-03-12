@@ -20,10 +20,10 @@ const getGedungbyid = (req,res) => {
     const idGedung = req.params.idGedung;
     const sqlQuery = "SELECT * FROM gedung WHERE idGedung = ?";
     db.query(sqlQuery, idGedung, (err, result) => {
-      if (err) {
+      if (err || !result.length) {
         console.log(err);
       } else {
-        res.send(result);
+        res.send(result[0]);
         console.log(result);
       }
     });

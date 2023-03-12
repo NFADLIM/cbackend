@@ -29,11 +29,11 @@ const getFasilitasid = (req,res) => {
     const idFasilitas = req.params.idFasilitas;
     const sqlQuery = "SELECT * FROM fasilitas WHERE idFasilitas = ?";
     db.query(sqlQuery, idFasilitas, (err, result) => {
-      if (err) {
+      if (err || !result.length) {
         console.log(err);
         console.log("gk ada");
       } else {
-        res.send(result);
+        res.send(result[0]);
         console.log(result);
       }
     });
