@@ -45,11 +45,11 @@ const addFasilitas = (req,res) => {
     const namaFasilitas = req.body.namaFasilitas;
     const linkTour = req.body.linkTour;
     const penjelasan = req.body.penjelasan;
-    //const image = req.body.image;
+    const gambar = req.body.gambar;
     
-    const sqlQuery = "INSERT INTO fasilitas (idFasilitas,idGedung, namaFasilitas, linkTour, penjelasan) VALUE (?,?, ?, ?, ?)";
+    const sqlQuery = "INSERT INTO fasilitas (idFasilitas,idGedung, namaFasilitas, linkTour, penjelasan, gambar) VALUE (?,?, ?, ?, ?, ?)";
     
-    db.query(sqlQuery, [idFasilitas, idGedung, namaFasilitas, linkTour,penjelasan], (err, result) => {
+    db.query(sqlQuery, [idFasilitas, idGedung, namaFasilitas, linkTour,penjelasan,gambar], (err, result) => {
       if (err) {
         console.log(err);
       } else {
@@ -66,10 +66,11 @@ const updateFasilitas = (req, res) => {
     const namaFasilitas = req.body.namaFasilitas;
     const linkTour = req.body.linkTour;
     const penjelasan = req.body.penjelasan;
+    const gambar = req.body.gambar;
     
-    const sqlQuery = " UPDATE fasilitas SET idGedung = ?, namaFasilitas = ?, linkTour = ?, penjelasan = ? WHERE idFasilitas = ?";
+    const sqlQuery = " UPDATE fasilitas SET idGedung = ?, namaFasilitas = ?, linkTour = ?, penjelasan = ?, gambar = ? WHERE idFasilitas = ?";
     
-    db.query(sqlQuery, [idGedung, namaFasilitas, linkTour,penjelasan, idFasilitas], (err, result) => {
+    db.query(sqlQuery, [idGedung, namaFasilitas, linkTour,penjelasan,gambar, idFasilitas], (err, result) => {
       if (err) {
         console.log(err);
       } else {
