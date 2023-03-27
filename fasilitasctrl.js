@@ -63,10 +63,10 @@ const addFasilitas = (req,res) => {
 const updateFasilitas = (req, res) => {
   const idFasilitas = req.params.idFasilitas;  
   const idGedung = req.body.idGedung;
-    const namaFasilitas = req.body.namaFasilitas;
-    const linkTour = req.body.linkTour;
-    const penjelasan = req.body.penjelasan;
-    const gambar = req.body.gambar;
+  const namaFasilitas = req.body.namaFasilitas;
+  const linkTour = req.body.linkTour || 'LinkTour';
+  const penjelasan = req.body.penjelasan;
+  const gambar = req.body.gambar;
 
     
     const sqlQuery = " UPDATE fasilitas SET idGedung = ?, namaFasilitas = ?, linkTour = ?, penjelasan = ?, gambar = ? WHERE idFasilitas = ?";
